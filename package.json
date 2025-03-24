@@ -1,0 +1,32 @@
+{
+  "name": "com.shatter-fantasy.sf-core",
+  "version": "0.0.1",
+  "description": "The SF Core package is used to install the other SF packages while maintaining the proper dependencies. ",
+  "displayName": "SF Core",
+  "unity": "6000.0",
+  "author": {
+    "name": "Jonathan Westfall - Shatter Fantasy",
+    "url": "https://www.linkedin.com/in/jonathan-westfall-shatter-fantasy/"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/@Shatter-Fantasy"
+  },
+  "documentationUrl": "",
+  "keywords": [
+    "Utilities",
+    "Core",
+    "Shatter Fantasy",
+    "Jonathan Westfall",
+    "Community Package"
+  ],
+  "category": "Core",
+  "repository": {
+    "url": "ssh://git@github.com:crowhound/SF-Core.git",
+    "type": "git",
+    "directory": "crowhound.sf-core"
+  },
+  "_upm": {
+    "changelog": "This is the initial release of the SF Core. \nThis is base off the currently unreleased branch of 0.0.5 of the SF Utilities."
+  },
+  "hideInEditor": false
+}
