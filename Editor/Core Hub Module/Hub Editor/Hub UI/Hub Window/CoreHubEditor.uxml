@@ -1,0 +1,16 @@
+<UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+             xmlns="UnityEngine.UIElements" 
+             xmlns:editor="UnityEditor.UIElements"
+             xmlns:sf="SF.UIElements"
+             noNamespaceSchemaLocation="../../../../../../../UIElementsSchema/UIElements.xsd" 
+             editor-extension-mode="False"
+>
+    <Style src="project://database/Packages/com.shatter-fantasy.sf-core/Editor/Core%20Hub%20Module/Hub%20Editor/Hub%20UI/Hub%20Window/CoreHubEditor.uss?fileID=7433441132597879392&amp;guid=3bf4854f86f68c844ac54393b5650a73&amp;type=3#CoreHubEditor" />
+   
+    <sf:SideBarLayout/>
+    
+    <VisualElement name="hub__content--container">
+        
+    </VisualElement>
+</UXML>
+

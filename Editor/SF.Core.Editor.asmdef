@@ -2,7 +2,9 @@
     "name": "SF.Core.Editor",
     "rootNamespace": "SFEditor.Core",
     "references": [
-        "GUID:c6169c8b9ba779e499da35485e53bc3e"
+        "GUID:c6169c8b9ba779e499da35485e53bc3e",
+        "GUID:e35e215503ab6b34eb8cadb39b7719da",
+        "GUID:5769175a692bee24cbd874f396613351"
     ],
     "includePlatforms": [
         "Editor"
