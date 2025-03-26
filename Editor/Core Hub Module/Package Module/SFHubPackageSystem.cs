@@ -60,6 +60,7 @@ namespace SFEditor.Core.Packages
         [InitializeOnLoadMethod]
         static void OnCorePackageLoad()
         {
+            Debug.Log("Checking SF Core Package to make sure the required ones are installed.");
             List<string> neededPackages = new();
             
             // We check for the package name first just in case we have a local/git loaded version of the package.
@@ -77,9 +78,14 @@ namespace SFEditor.Core.Packages
                 Debug.Log("SF UI Elements was not installed. Setting up a package install request.");
             }
             
+            SFInstalledPackages.Add(SFPackageDefaults.SFUtilitiesPackage);
+            SFInstalledPackages.Add(SFPackageDefaults.SFUIElementsPackage);
+            
             // If any of the required packages are missing and in the needed package array installl them.
             if(neededPackages.Count > 0)
                 RequiredPackageSetupRequest = Client.AddAndRemove(neededPackages.ToArray());
+            
+            
         }
 
         //[MenuItem("SF/Packages/Embed Required Packages")]

@@ -3,8 +3,11 @@ using SF.UIElements.Utilities;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+
 namespace SFEditor.Core.Packages
 {
+    
+#if SF_UIELEMENTS
     [UxmlElement]
     public partial class PackageDataControl : SFVisualElementBase
     {
@@ -40,6 +43,7 @@ namespace SFEditor.Core.Packages
             this.SetAllBorders(1, Color.black);
             
             RegisterEvents();
+
         }
 
 
@@ -56,8 +60,17 @@ namespace SFEditor.Core.Packages
             // Testing remove.
             if (string.IsNullOrEmpty(evt.newValue))
                 return;
-
+        
             SFHubPackageSystem.AddSFPackage(_packageData);
         }
     }
+
+#else
+
+    // This is if the SF UIElements package has not been pulled in yet.
+    public partial class PackageDataControl : VisualElement
+    {
+        public PackageDataControl(){}
+    }
+#endif
 }
