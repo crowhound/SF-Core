@@ -1,0 +1,16 @@
+{
+    "name": "SF.Core.Packages.Editor",
+    "rootNamespace": "SFEditor.Core.Packages",
+    "references": [],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
