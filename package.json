@@ -1,9 +1,9 @@
 {
   "name": "com.shatter-fantasy.sf-core",
   "version": "0.0.1",
-  "description": "The SF Core package is used to install the other SF packages while maintaining the proper dependencies. ",
+  "description": "The SF Core package is used to install the other SF packages while maintaining the proper dependencies.",
   "displayName": "SF Core",
-  "unity": "6000.0",
+  "unity": "6000.3",
   "author": {
     "name": "Jonathan Westfall - Shatter Fantasy",
     "url": "https://www.linkedin.com/in/jonathan-westfall-shatter-fantasy/"
@@ -11,7 +11,6 @@
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/@Shatter-Fantasy"
   },
-  "documentationUrl": "",
   "keywords": [
     "Utilities",
     "Core",

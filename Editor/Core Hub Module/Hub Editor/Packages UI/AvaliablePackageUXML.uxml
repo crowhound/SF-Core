@@ -1,0 +1,23 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False" noNamespaceSchemaLocation="../../../../../../UIElementsSchema/UIElements.xsd">
+    <ui:Label name="display-name__label">
+        <Bindings>
+            <ui:DataBinding property="text" data-source-path="PackageDisplayName" data-source-type="SFEditor.Core.Packages.SFPackageData, SF.Core.Packages.Editor" binding-mode="ToTarget" />
+        </Bindings>
+    </ui:Label>
+    <ui:EnumField name="release-status__label" type="SFEditor.Core.Packages.PackageReleaseStatus, SF.Core.Packages.Editor">
+        <Bindings>
+            <ui:DataBinding property="value" data-source-path="ReleaseStatus" data-source-type="SFEditor.Core.Packages.SFPackageData, SF.Core.Packages.Editor" binding-mode="ToTarget" />
+        </Bindings>
+    </ui:EnumField>
+    <ui:Button name="package-install__button" text="Install Package With Dependencies" />
+    <ui:Label name="package-url__label">
+        <Bindings>
+            <ui:DataBinding property="text" data-source-path="BasePackageURL" data-source-type="SFEditor.Core.Packages.SFPackageData, SF.Core.Packages.Editor" binding-mode="ToTarget" />
+        </Bindings>
+    </ui:Label>
+    <ui:Label name="package-name__label" >
+        <Bindings>
+            <ui:DataBinding property="text" data-source-path="PackageName" data-source-type="SFEditor.Core.Packages.SFPackageData, SF.Core.Packages.Editor" binding-mode="ToTarget" />
+        </Bindings>
+    </ui:Label>
+</ui:UXML>

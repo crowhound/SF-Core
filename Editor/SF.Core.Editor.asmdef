@@ -15,13 +15,13 @@
     "precompiledReferences": [],
     "autoReferenced": false,
     "defineConstraints": [
-        "SF_UIELEMENTS"
+        "SF_UI_ELEMENTS"
     ],
     "versionDefines": [
         {
             "name": "shatter-fantasy.sf-ui-elements",
             "expression": "0.0.1",
-            "define": "SF_UIELEMENTS"
+            "define": "SF_UI_ELEMENTS"
         }
     ],
     "noEngineReferences": false
