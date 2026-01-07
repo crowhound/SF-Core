@@ -1,0 +1,8 @@
+.group__container{
+    flex-direction:row;
+}
+.category__header {
+    font-size: 20px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
