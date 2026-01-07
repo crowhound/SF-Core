@@ -24,7 +24,7 @@ public class CoreHubEditor : EditorWindow
     
     private VisualElement Root => rootVisualElement;
     
-    [MenuItem("Tools/SF/CoreHubEditor")]
+    [MenuItem("SF/Core/HubEditor")]
     public static void ShowEditor()
     {
         CoreHubEditor wnd = GetWindow<CoreHubEditor>();

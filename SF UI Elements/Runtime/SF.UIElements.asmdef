@@ -1,9 +1,7 @@
 {
     "name": "SF.UIElements",
     "rootNamespace": "SF.UIElements",
-    "references": [
-        "GUID:2f101f87087d58f4ba92ca00188e763d"
-    ],
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
