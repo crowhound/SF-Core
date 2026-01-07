@@ -4,7 +4,6 @@ using UnityEngine.UIElements;
 using SF.UIElements;
 using SF.UIElements.Utilities;
 using SFEditor.Core.Packages;
-using static SFEditor.Core.Packages.SFPackageDefaults;
 
 namespace SFEditor.Core
 {
@@ -14,13 +13,21 @@ namespace SFEditor.Core
         public new const string USSClassName = "hub-package__view";
 
         public List<SFPackageData> InstalledPackages => SFHubPackageSystem.SFInstalledPackages;
+        public List<SFPackageData> ExtraPackages => SFHubPackageSystem.SFExtraPackages;
         
-        public SFPackageData UtilitiesPackage = new(SFUtilitiesPackageName, SFUtilitiesBasePackageURL); 
-
         public HubPackageView() : base()
         {
             foreach (var packageData in InstalledPackages)
             {
+                this.AddChild(new PackageDataControl(packageData));
+            }
+
+            foreach (var packageData in ExtraPackages)
+            {
+                // If we already have the extra package installed don't show it again.
+                if(InstalledPackages.Contains(packageData))
+                    continue;
+                
                 this.AddChild(new PackageDataControl(packageData));
             }
             

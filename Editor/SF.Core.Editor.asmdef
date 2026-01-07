@@ -1,10 +1,11 @@
 {
-    "name": "SF.Core.Editor",
+    "name": "SFEditor.Core",
     "rootNamespace": "SFEditor.Core",
     "references": [
         "GUID:c6169c8b9ba779e499da35485e53bc3e",
         "GUID:e35e215503ab6b34eb8cadb39b7719da",
-        "GUID:5769175a692bee24cbd874f396613351"
+        "GUID:5769175a692bee24cbd874f396613351",
+        "GUID:3501f6086cdd0e648ac05237fdb4fbad"
     ],
     "includePlatforms": [
         "Editor"
@@ -15,13 +16,13 @@
     "precompiledReferences": [],
     "autoReferenced": false,
     "defineConstraints": [
-        "SF_UIELEMENTS"
+        "SF_UI_ELEMENTS"
     ],
     "versionDefines": [
         {
             "name": "shatter-fantasy.sf-ui-elements",
             "expression": "0.0.1",
-            "define": "SF_UIELEMENTS"
+            "define": "SF_UI_ELEMENTS"
         }
     ],
     "noEngineReferences": false

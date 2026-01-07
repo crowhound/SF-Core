@@ -1,3 +1,57 @@
-PackageDataControl{
+
+/* Need to do this or the visual elements from
+    VisualTreeAsset.Instantiate() won't be properly sized when done via C# code.
+*/
+TemplateContainer{
+    height: 100%;
+}
+
+PackageDataControl {
     
+}
+
+/*  SideBarLayout is the root of both the Side Bar Menu and the Main Content container.
+    This is important because for considering CSS flex options.
+*/
+SideBarLayout {
+    height: 100%;
+}
+
+/*  Start of Hub Main Views - These are the views seen when clicking on the main sidebar.
+    All Hub Main Views are children of the side-bar__container named VisualElement.
+    If a view is having sizing issues check the .side-bar__container styles just in case.
+*/
+HubPackageView {
+    flex-grow: 1;
+}
+/* Start of Package Data Controls */
+PackageDataControl {
+    margin: 10px;
+    padding: 3px;
+    border-color: black;
+    border-radius: 5px;
+    border-width:  1px 1px 2px 1px;
+}
+
+PackageDataControl .unity-text-element{
+    font-size: 14px;
+    -unity-font-style: bold;
+}
+
+
+/* The actual sidebar container. */
+.side-bar__menu {
+        flex-direction: column;
+}
+
+.side-bar__menu > Button {
+    font-size: 22px;
+    max-height: 55px;
+    /* Combined with a parent flex container will auto size evenly to take the whole container space up. */
+    flex-grow: 1;
+    margin: 5px 0;
+}
+
+.side-bar__container {
+    flex-grow: 1;
 }

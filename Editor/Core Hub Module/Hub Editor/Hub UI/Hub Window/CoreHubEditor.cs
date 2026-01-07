@@ -1,14 +1,13 @@
 using SF.UIElements;
-using SFEditor.Core.Packages;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 using SF.UIElements.Utilities;
 using SFEditor.Core;
-using UnityEngine.UIElements.Experimental;
-using static SFEditor.Core.Packages.SFPackageDefaults;
 using static SFEditor.UIElements.Utilities.SFUIElementsFactory;
+
+
 
 public class CoreHubEditor : EditorWindow
 {
@@ -43,11 +42,13 @@ public class CoreHubEditor : EditorWindow
             return;
         }
 
-        _hubVisualTemplate = new();
-        
-       _hubVisualTreeAsset.CloneTree(_hubVisualTemplate);
+      // _hubVisualTreeAsset.CloneTree(_hubVisualTemplate);
+       _hubVisualTemplate = _hubVisualTreeAsset.Instantiate();
        Root.AddChild(_hubVisualTemplate); // Unity's default
-
+       
+       // TODO:Use this method to add icons for the buttons.
+       //  .AddChild(new Button( Background.FromVectorImage(ReleaseNotesIcon)){text = "Release Notes"})
+       
        Root.Q<SideBarLayout>().SideBarMenu
            .AddChild(new Button(){text = "Welcome"})
            .AddChild(new Button(){text = "Packages"})

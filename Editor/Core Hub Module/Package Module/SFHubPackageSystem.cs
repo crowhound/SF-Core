@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEditor;
+using UnityEditor.Build;
 using UnityEditor.PackageManager;
 using UnityEditor.PackageManager.Requests;
 using UnityEngine;
@@ -10,6 +11,11 @@ namespace SFEditor.Core.Packages
     public static class SFHubPackageSystem
     {
         public static List<SFPackageData> SFInstalledPackages { get; private set; } = new();
+        
+        /// <summary>
+        /// These are the extra SF Packages like the SF Metroidvania package that can be installed.
+        /// </summary>
+        public static List<SFPackageData> SFExtraPackages { get; private set; } = new();
 
         /// <summary>
         /// A collection of packages installed in the project.
@@ -35,8 +41,7 @@ namespace SFEditor.Core.Packages
             {
                 if(string.IsNullOrEmpty(PackageVersion))
                     return PackageBaseURl;
-                else
-                    return $"{PackageBaseURl}#{PackageVersion}";
+                return $"{PackageBaseURl}#{PackageVersion}";
             }
         }
 
@@ -45,8 +50,8 @@ namespace SFEditor.Core.Packages
         internal const string PackageAlreadyInstalledMessage = "Package is already installed";
 
         internal static AddAndRemoveRequest RequiredPackageSetupRequest;
-        internal static List<Request<UnityEditor.PackageManager.PackageInfo[]>> InProgressSearchRequests = new();
-        internal static List<Request<UnityEditor.PackageManager.PackageInfo>> InProgressAddRequests = new();
+        internal static List<Request<PackageInfo[]>> InProgressSearchRequests = new();
+        internal static List<Request<PackageInfo>> InProgressAddRequests = new();
         internal static AddRequest AddRequest;
         internal static AddRequest SearchRequest;
         internal static EmbedRequest EmbedRequest;
@@ -57,10 +62,9 @@ namespace SFEditor.Core.Packages
         /// Installs the SF Utilities and the SF UI Toolkit package if they are not already in the project.
         /// This is done when the editor first opens or when a recompile happens.
         /// </summary>
-        [InitializeOnLoadMethod]
+        //[InitializeOnLoadMethod]
         static void OnCorePackageLoad()
         {
-            Debug.Log("Checking SF Core Package to make sure the required ones are installed.");
             List<string> neededPackages = new();
             
             // We check for the package name first just in case we have a local/git loaded version of the package.
@@ -78,14 +82,23 @@ namespace SFEditor.Core.Packages
                 Debug.Log("SF UI Elements was not installed. Setting up a package install request.");
             }
             
+            /*
+            if (!PackageInfo.IsPackageRegistered(SFPackageDefaults.SFMetroidvaniaPackage.PackageName))
+            {
+                neededPackages.Add(SFPackageDefaults.SFMetroidvaniaPackage.FullPackageURL);
+                Debug.Log("SF Metroidvania was not installed. Setting up a package install request.");
+            }*/
+            
             SFInstalledPackages.Add(SFPackageDefaults.SFUtilitiesPackage);
             SFInstalledPackages.Add(SFPackageDefaults.SFUIElementsPackage);
             
-            // If any of the required packages are missing and in the needed package array installl them.
+            
+            // Add the known extra SF Packages to the ExtraPackage list.
+            SFExtraPackages.Add(SFPackageDefaults.SFMetroidvaniaPackage);
+            
+            // If any of the required packages are missing and in the needed package array install them.
             if(neededPackages.Count > 0)
                 RequiredPackageSetupRequest = Client.AddAndRemove(neededPackages.ToArray());
-            
-            
         }
 
         //[MenuItem("SF/Packages/Embed Required Packages")]
@@ -148,19 +161,19 @@ namespace SFEditor.Core.Packages
 
         private static void EmbeddedProgress()
         {
-            if(EmbedRequest.IsCompleted)
-            {
-                if(EmbedRequest.Status == StatusCode.Success)
-                    Debug.Log("Embedded: " + EmbedRequest.Result.packageId);
-                else if(EmbedRequest.Status >= StatusCode.Failure)
-                    Debug.Log(EmbedRequest.Error.message);
+            if (!EmbedRequest.IsCompleted)
+                return;
+            
+            if(EmbedRequest.Status == StatusCode.Success)
+                Debug.Log("Embedded: " + EmbedRequest.Result.packageId);
+            else if(EmbedRequest.Status >= StatusCode.Failure)
+                Debug.Log(EmbedRequest.Error.message);
 
-                EditorApplication.update -= EmbeddedProgress;
-            }
+            EditorApplication.update -= EmbeddedProgress;
         }
 
         //[MenuItem("SF/Packages/Add Required Packages")]
-        static void AddPackages()
+        private static void AddPackages()
         {
             // Don't due this when running the application.
             // This happens if someone runs the command while in play mode, but not in runtime builds.
@@ -260,19 +273,19 @@ namespace SFEditor.Core.Packages
             {
                 if(InProgressSearchRequests[i].IsCompleted)
                 {
-                    if(InProgressSearchRequests[i].Status == StatusCode.Success)
+                    switch (InProgressSearchRequests[i].Status)
                     {
-                        Debug.Log("Finished searching for the passed in package:" + InProgressSearchRequests[i]);
-                    } 
-                    
-                    /*  The >= here checks the enum value as an int.
+                        case StatusCode.Success:
+                            Debug.Log("Finished searching for the passed in package:" + InProgressSearchRequests[i]);
+                            break;
+                        /*  The >= here checks the enum value as an int.
                         Technically this is a web request that gets returns. If the int is higher than
                         2 than there was a reason it failed. Technically there are several failure codes
                         but Unity only has implmented an enum for 0 = InProgress,
                         1 = Sucess, 2 = failed for some reason. */
-                    else if(InProgressSearchRequests[i].Status == StatusCode.Failure)
-                    {
-                        Debug.Log(InProgressSearchRequests[i].Error.message);
+                        case StatusCode.Failure:
+                            Debug.Log(InProgressSearchRequests[i].Error.message);
+                            break;
                     }
 
                     InProgressSearchRequests.Remove(InProgressSearchRequests[i]);
@@ -287,16 +300,15 @@ namespace SFEditor.Core.Packages
         }
         
         //[MenuItem("SF/Scripting/Check Scripting Symbols")]
-        static void CheckScriptingDefineSymbols()
+        private static void CheckScriptingDefineSymbols()
         {
-            Debug.Log(PlayerSettings.GetScriptingDefineSymbols(UnityEditor.Build.NamedBuildTarget.Standalone));
+            Debug.Log(PlayerSettings.GetScriptingDefineSymbols(NamedBuildTarget.Standalone));
         }
 
         //[MenuItem("SF/Scripting/Add Scripting Symbols")]
-        static void AddScriptingDefineSymbols()
+        private static void AddScriptingDefineSymbols()
         {
             
         }
-        
     }
 }

@@ -1,55 +1,51 @@
+using UnityEditor;
+using UnityEngine.UIElements;
+
+using static SFEditor.Core.Utilities.HubPathUtilities;
+
 using SF.UIElements;
 using SF.UIElements.Utilities;
 using UnityEngine;
-using UnityEngine.UIElements;
-
 
 namespace SFEditor.Core.Packages
 {
-    
-#if SF_UIELEMENTS
     [UxmlElement]
-    public partial class PackageDataControl : SFVisualElementBase
+    public sealed partial class PackageDataControl : SFVisualElementBase
     {
+
+        private Button _installButton;
         
-        private Label _packageNameLabel = new Label();
-        private Label _packageURLLabel = new Label();
-
-        private TextField _packageReleaseTag = new();
-
         private SFPackageData _packageData;
         public SFPackageData PackageData 
         {  
             get => _packageData;
             private set => _packageData = value;
         }
-
+        
         public PackageDataControl()
         {
-            
+            _visualTreeAsset = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(AvailablePackageUXMLPath);
+            CloneVisualTreeAsset();
         }
-
         public PackageDataControl(SFPackageData packageData)
         {
+            _visualTreeAsset = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(AvailablePackageUXMLPath);
+            CloneVisualTreeAsset();
+            
             PackageData = packageData;
+            // Have to set the data source of the TemplateContainer not the root C# VisualElement object.
+            _rootTemplateContainer.dataSource = PackageData;
             
-            _packageNameLabel.text = "Package Name: " + packageData.PackageName;
-            _packageURLLabel.text = "Package Git Url: " + packageData.FullPackageURL;
+            _installButton = _rootTemplateContainer
+                .Q<Button>("package-install__button")
+                ?.OnClick(OnInstallButtonClicked);
             
-            this.AddChild(_packageNameLabel)
-                .AddChild(_packageURLLabel)
-                .AddChild(_packageReleaseTag);
-
-            this.SetAllBorders(1, Color.black);
-            
-            RegisterEvents();
-
         }
 
-
-        private void RegisterEvents()
+        private void OnInstallButtonClicked()
         {
-            _packageReleaseTag.RegisterValueChangedCallback(OnReleaseTagValueChanged);
+            Debug.Log($"Installing: {_packageData.PackageName}");
+            SFHubPackageSystem.AddSFPackage(_packageData);
         }
 
         private void OnReleaseTagValueChanged(ChangeEvent<string> evt)
@@ -64,13 +60,4 @@ namespace SFEditor.Core.Packages
             SFHubPackageSystem.AddSFPackage(_packageData);
         }
     }
-
-#else
-
-    // This is if the SF UIElements package has not been pulled in yet.
-    public partial class PackageDataControl : VisualElement
-    {
-        public PackageDataControl(){}
-    }
-#endif
 }
