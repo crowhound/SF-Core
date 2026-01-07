@@ -21,7 +21,7 @@ namespace SFEditor.Utilities
 
     public static class HandlesUtilities
     {
-        /* Circle Geometry Formulas
+        /* Circle Geomentry Formulas
         // Circle Area = PI * Radius * Radius
         // Area of a sector of a circle = (Theta Angle / 2 * PI) * (PI * Radius * Radius)
         // Area of a segment of a circle when Theta angle is in Radians = (Theta Angle - Sin(Theta Angle) /2 ) * Radius * Radius 

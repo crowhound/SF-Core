@@ -1,7 +1,7 @@
 {
   "name": "shatterfantasy.sf-core",
   "version": "0.0.1",
-  "description": "The SF Core packagecontains commonly used utility functions for multiple SF Packages.",
+  "description": "The SF Core package is used to install the other SF packages while maintaining the proper dependencies.",
   "displayName": "SF Core",
   "unity": "6000.3",
   "author": {

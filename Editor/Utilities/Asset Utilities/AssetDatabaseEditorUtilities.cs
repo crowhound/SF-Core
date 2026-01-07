@@ -4,8 +4,6 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 
-using SF.Utilities;
-
 namespace SFEditor.Utilities
 {
     public static class AssetDatabaseEditorUtilities
