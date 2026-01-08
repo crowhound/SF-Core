@@ -1,20 +1,19 @@
 # Changelog
 
-## [0.0.1] - 12/1/2025
+## [0.0.6] - WIP 1/8/2026
 
-### Added 
-
-#### Core Hub Editor
-
-### Changed
-
-#### Package Settings
-- Updated the Unity Registery Package Dependencies 
-    - Input System 1.5.1
-    - Cinemachine 3.0.0-pre.4
+Fixed:
+- SFCommonStyleSheet not loading automatrically
+It just needed the path to the sheet used in the variable updated after SF UI Elements became a sub package of SF Core.
 
 
-## [0.0.1] - 2023-03-31
+## [0.0.5] - 1/7/2026
+This version merged the SF UI Elements and the SF Utilities into a single package 
+that is now the SF Core package.
 
-### Added
-- Initial example changelog data.
+This is done for the following reasons:
+- Lower the amount of packages and dependencies for all other SF packages.
+- Improve user install workflow
+- Lower amount of repos needing to have focus split.
+- To sync changes between the combined packages with bigger complete toolkit 
+packages like SF Metroidvania and SF Sprite Editor.
