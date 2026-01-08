@@ -11,7 +11,14 @@ namespace SFEditor.UIElements.Utilities
     public class SFUIElementsFactory
     {
         public const string SFCommonStyleSheetName = "CommonUSS";
-        public const string SFCommonStyleSheeAssetPath = "Packages/shatter-fantasy.sf-ui-elements/Runtime/Styles/CommonUSS.uss";
+        /// <summary>
+        /// Base path to the root folder of the SFUIElements package.
+        /// <remarks>
+        /// The root path to SF UI Elements is a sub package directory inside of the SF Core package.
+        /// </remarks>
+        /// </summary>
+        public const string SFUIElementsRootPath = "Packages/shatterfantasy.sf-core/SF UI Elements";
+        public static readonly string SFCommonStyleSheetAssetPath = $"{SFUIElementsRootPath}/Runtime/Styles/CommonUSS.uss";
 
         private static StyleSheet _sfCommonStyleSheet;
         public static StyleSheet SFCommonStyleSheet
@@ -20,7 +27,7 @@ namespace SFEditor.UIElements.Utilities
             {
                 if(_sfCommonStyleSheet == null)
                 {
-                    _sfCommonStyleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>(SFCommonStyleSheeAssetPath);
+                    _sfCommonStyleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>(SFCommonStyleSheetAssetPath);
                     // If we can't find the Common Style Sheet for some reason do a safe fail.
                     if(_sfCommonStyleSheet == null)
                     {
