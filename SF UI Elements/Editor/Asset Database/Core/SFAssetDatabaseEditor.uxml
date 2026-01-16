@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UXML
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="UnityEngine.UIElements"
+    xmlns:editor="UnityEditor.UIElements"
+    xsi:noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd"
+>
+    <Style src="project://database/Packages/shatter-fantasy.sf-ui-elements/Editor/Asset%20Database/Core/SFAssetDatabase.uss?fileID=7433441132597879392&amp;guid=4a7acfbb4da4b6f4b9ffecee799758d7&amp;type=3#SFAssetDatabase" />
+  
+  <VisualElement class="group__Container">
+    <VisualElement>
+      <ListView name="category__list-view"/>
+    </VisualElement>
+    <VisualElement>
+      <Label text="Categories" class="category__header"/>
+
+      <Label text="Textures"/>
+      <Label text="Sprites"/>
+    </VisualElement>
+
+    <VisualElement>
+      <Label text="UI UXMl" class="category__header"/>
+      <Label text="UI Containers"/>
+      <Label text="UI Controls"/>
+    </VisualElement>
+    <VisualElement>
+      <editor:ObjectField class="data-entry__Field"/>
+      <editor:ObjectField class="data-entry__Field"/>
+      <editor:ObjectField class="data-entry__Field"/>
+    </VisualElement>
+
+  </VisualElement>
+
+  <VisualElement>
+
+  </VisualElement>
+</UXML>
