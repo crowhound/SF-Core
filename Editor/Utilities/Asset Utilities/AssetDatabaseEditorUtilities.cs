@@ -33,6 +33,10 @@ namespace SFEditor.Utilities
         public static T FindFirstAssetOfType<T>(string searchGlobFilter = "") where T : Object
         {
             string[] guids = AssetDatabase.FindAssets($"{searchGlobFilter} t:{typeof(T).Name}");
+            
+            if (guids == null || guids.Length < 1 || string.IsNullOrEmpty(guids[0]))
+                return null;
+            
             _cachedPath = AssetDatabase.GUIDToAssetPath(guids[0]);
             return AssetDatabase.LoadAssetAtPath<T>(_cachedPath);
         }
