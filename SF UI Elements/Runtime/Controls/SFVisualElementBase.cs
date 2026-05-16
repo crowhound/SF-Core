@@ -4,7 +4,7 @@ using UnityEngine.UIElements;
 
 namespace SF.UIElements
 {
-  
+    [UxmlElement]
     public partial class SFVisualElementBase : VisualElement
     {
         public const string USSClassName = "sf-element";
@@ -18,6 +18,12 @@ namespace SF.UIElements
         public SFVisualElementBase()
         {
             this.AddClass(USSClassName);
+        }
+        
+        public SFVisualElementBase(string name)
+        {
+            this.AddClass(USSClassName);
+            this.name = name;
         }
 
         protected virtual void CloneVisualTreeAsset()
