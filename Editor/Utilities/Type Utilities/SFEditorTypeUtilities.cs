@@ -10,7 +10,7 @@ namespace SFEditor.Utilities
     /// <summary>
     /// A collection of helper methods that uses Unity's built in <see cref="TypeCache"/>  
     /// </summary>
-    public static class UnityEditorTypeUtilities
+    public static class SFEditorTypeUtilities
     {
         
         /// <summary>Search all assemblies for all types that match a predicate</summary>
