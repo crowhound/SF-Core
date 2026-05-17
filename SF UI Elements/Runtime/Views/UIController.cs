@@ -11,38 +11,52 @@ namespace SF.UIModule
 	///		Depending on the submenu it might have its own UIController class for its logic.
 	/// </remarks>
 	/// </summary>
-    public abstract class UIController : MonoBehaviour
+	public abstract class UIControllerBase : MonoBehaviour
 	{
-	    protected PanelRenderer _panelRenderer;
+		public abstract void ShowView();
+		public abstract void HideView();
+	}
+	
+	/// <summary>
+	/// The wrapper class for anything that controls the logic of an <see cref="UIView"/> or a class that inherits from <see cref="UIView"/>.
+	/// <remarks>
+	///		There can be multiple UIController using the same <see cref="UnityEngine.UIElements.UIDocument"/>.
+	///		Example the main menu has sub <see cref="UIView"/> that display a specific menu like inventory, options, and ect.
+	///		Depending on the submenu it might have its own UIController class for its logic.
+	/// </remarks>
+	/// </summary>
+    public abstract class UIController : UIControllerBase
+	{
+		protected PanelRenderer _panelRenderer;
 	    
-	    protected void Awake()
-	    {
-		    if(_panelRenderer == null)
-		    {
-			    // If _panelRenderer is null try to find one on the gameobject.
-			    if(!TryGetComponent(out _panelRenderer))
-			    {
+		protected void Awake()
+		{
+			if(_panelRenderer == null)
+			{
+				// If _panelRenderer is null try to find one on the gameobject.
+				if(!TryGetComponent(out _panelRenderer))
+				{
 #if UNITY_EDITOR
-				    Debug.LogWarning("There was no Main Menu UI Document found.", gameObject);
+					Debug.LogWarning("There was no Main Menu UI Document found.", gameObject);
 #endif 
-				    return;
-			    }
-		    } // End of null check and attempting to find a UI Document for Main Menu.
+					return;
+				}
+			} // End of null check and attempting to find a UI Document for Main Menu.
 			
 			
 			// If the _panelRenderer was still null after trying to find one OnAwake is never called. 
-		    OnAwake();
-	    }
+			OnAwake();
+		}
 
 
 		/// <summary>
-	    /// Override this to add custom Awake logic to UIControllers.
-	    /// If a class inheriting from the UIController needs to delay the RegisterUIReloadCallback override the OnAwake.
-	    /// <example>
-	    ///	Delaying an Inventory RegisterUIReloadCallback till after the inventory database or player inventory has been initiailized.
-	    /// </example>
-	    /// </summary>
-	    protected virtual void OnAwake() { }
+		/// Override this to add custom Awake logic to UIControllers.
+		/// If a class inheriting from the UIController needs to delay the RegisterUIReloadCallback override the OnAwake.
+		/// <example>
+		///	Delaying an Inventory RegisterUIReloadCallback till after the inventory database or player inventory has been initiailized.
+		/// </example>
+		/// </summary>
+		protected virtual void OnAwake() { }
 
 		protected virtual void OnEnable()
 		{
@@ -63,6 +77,5 @@ namespace SF.UIModule
 		/// <param name="panelRenderer"></param>
 		/// <param name="rootElement"></param>
 		protected abstract void OnUIControllerUIReloaded(PanelRenderer panelRenderer, VisualElement rootElement);
-
 	}
 }
