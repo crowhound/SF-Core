@@ -2,6 +2,7 @@ using UnityEngine.UIElements;
 
 namespace SF.UIModule
 {
+
     public interface IUIView
     {
         // Properties
