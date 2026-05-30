@@ -39,10 +39,31 @@ namespace SFEditor.Utilities
             return list;
         }
         
+
+        /* Important notes for normal users!! Please read the following comment before using the below API.
+         * The code below this comment will almost not be used by anyone because this ends up doing a lot of
+         * advance things related to how Unity keeps tracks of MonoBehavior references in the project files.
+         * 
+         * Normal users should avoid any of the methods below if you don't know much about Unity's internal library code.
+         * Stuff like the API below is more commonly used by the Unity Engine dev team themselves.
+         * This involves Unity's <see cref="TypeCache"/>.
+         *
+         * The code below literally goes into API where bytes are manually unpinned using
+         * __unpin(begin);         */
+        
+        /// <summary>
+        /// Used to update references in scripts when a type was changed for a serialized value that was a MonoBehavior.
+        /// <remarks>
+        /// If you ever deleted a script for a scriptable object without deleting the scriptable object from your Unity project,
+        /// than went and clicked the scriptable object to see in the inspector a warning that the type is missing,
+        /// that is Unity's internal version of this delegate. 
+        /// </remarks>
+        /// </summary>
         public delegate MonoBehaviour ReferenceUpdater(Type expectedType, MonoBehaviour oldValue);
 
         /// <summary>
-        /// Recursive scan that calls handler for all serializable fields that reference a MonoBehaviour
+        /// Recursive scan that invokes a handler for all serializable fields that reference a MonoBehaviour.
+        /// This involves native code used in Unity's <see cref="TypeCache"/>.
         /// </summary>
         public static bool RecursiveUpdateBehaviourReferences(GameObject go, ReferenceUpdater updater)
         {
@@ -144,7 +165,5 @@ namespace SFEditor.Utilities
                 return changed;
             }
         }
-
-
     }
 }
